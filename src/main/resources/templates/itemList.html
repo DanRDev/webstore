@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Item List</title>
+  <style>
+    .item-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+    .item {
+        flex: 1 1 calc(25% - 20px); /* 25% width minus the gap */
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .item img {
+        max-width: 100%;
+        height: auto;
+    }
+    .item h2 {
+        margin: 10px 0;
+        font-size: 1.5em;
+        text-align: center;
+    }
+    .item p {
+        margin: 10px 0;
+        text-align: center;
+    }
+    .item a {
+        text-decoration: none;
+        color: #007bff;
+    }
+    .item a:hover {
+        text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<h1>Item List</h1>
+
+<div>
+  <ul>
+    <li th:each="entry : ${items.entrySet()}" class="item">
+      <h2 th:text="${entry.value.a}"></h2>
+      <p>
+        <img th:if="${entry.value.b}" th:src="'data:image/png;base64,' + ${entry.value.b}" alt="Image" width="400"/>
+      </p>
+      <a th:href="@{/items/{id}(id=${entry.key})}">View Details</a>
+    </li>
+  </ul>
+</div>
+
+<a href="/">Back to Home</a>
+
+</body>
+</html>
