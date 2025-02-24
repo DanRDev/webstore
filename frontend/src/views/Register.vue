@@ -36,6 +36,7 @@
   const message = ref<string | null>(null);
   
   const register = async () => {
+
   try {
     const response = await axios.post('http://localhost:8080/api/auth/register', form.value, {
       headers: { "Content-Type": "application/json" }
@@ -46,4 +47,5 @@
     console.error('Registration error:', error);
   }
 };
+
   </script>
