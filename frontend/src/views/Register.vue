@@ -36,12 +36,16 @@
   const message = ref<string | null>(null);
   
   const register = async () => {
-    try {
-      const response = await axios.post('http://localhost:8080/auth/register', form.value);
-      message.value = response.data.message; // Show success message from backend
-    } catch (error) {
-      message.value = 'Registration failed! Please try again.';
-      console.error('Registration error:', error);
-    }
-  };
+
+  try {
+    const response = await axios.post('http://localhost:8080/api/auth/register', form.value, {
+      headers: { "Content-Type": "application/json" }
+    });
+    message.value = response.data.message; // Show success message from backend
+  } catch (error) {
+    message.value = 'Registration failed! Please try again.';
+    console.error('Registration error:', error);
+  }
+};
+
   </script>
